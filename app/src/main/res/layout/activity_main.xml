@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="UserName"/>
+        android:text="Currently logged in User"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Password"/>
+        android:text="Current User's password"/>
 
     <EditText
         android:layout_width="match_parent"

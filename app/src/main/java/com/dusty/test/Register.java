@@ -28,6 +28,10 @@ public class Register extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.registerButton:
+                String username = userEntered.getText().toString();
+                String password = passwordEntered.getText().toString();
+
+                UserInfo registrationInfo = new UserInfo(username, password);
                 break;
         }
     }

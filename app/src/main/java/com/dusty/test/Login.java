@@ -2,7 +2,6 @@ package com.dusty.test;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,7 @@ public class Login extends Activity implements View.OnClickListener {
 
     Button loginButton, registerLink;
     EditText enteredUser, enteredPassword;
-
+    UserInfoLocalStore userInfoLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +26,17 @@ public class Login extends Activity implements View.OnClickListener {
         registerLink = (Button) findViewById(R.id.registerLink);
         registerLink.setOnClickListener(this);
 
+        //        grants access to the local store
+        userInfoLocalStore = new UserInfoLocalStore(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.loginButton:
+                UserInfo enteredUserInfo = new UserInfo(null, null);
+                userInfoLocalStore.storeUserData(enteredUserInfo);
+                userInfoLocalStore.setUserLoggedIn(true);
                 break;
             case R.id.registerLink:
                 Log.d("Diag", "user pressed registerLink");
@@ -41,5 +45,5 @@ public class Login extends Activity implements View.OnClickListener {
         }
     }
 
-    public class LoginConn extends AsyncTask
+
 }
