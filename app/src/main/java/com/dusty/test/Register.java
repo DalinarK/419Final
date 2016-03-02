@@ -107,7 +107,6 @@ public class Register extends Activity implements View.OnClickListener {
                 }
 //                Convert to a String
                 String finalJSON = buffer.toString();
-                Log.d("Diag", "Works so far");
 
                 Log.d("Diag", finalJSON);
 //                Convert to JSONObject for manipulation
