@@ -18,7 +18,7 @@ public class UserInfoLocalStore {
 //    Takes the data and stores it in UserInfo User
     public void storeUserData (UserInfo user) {
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
-        spEditor.putString("name", user.name);
+        spEditor.putString("id", user.id);
         spEditor.putString("username", user.username);
         spEditor.putString("password", user.password);
         spEditor.commit();
@@ -26,11 +26,11 @@ public class UserInfoLocalStore {
 
 //    Pulls user info out of local DB and returns it.
     public UserInfo getLoggedInUser(){
-        String name = userLocalDatabase.getString("name", "");
+        String id = userLocalDatabase.getString("id", "");
         String username = userLocalDatabase.getString("username", "");
         String password = userLocalDatabase.getString("password", "");
 
-        UserInfo storedUser = new UserInfo(name, username, password);
+        UserInfo storedUser = new UserInfo(username, password, id);
 
         return storedUser;
     }

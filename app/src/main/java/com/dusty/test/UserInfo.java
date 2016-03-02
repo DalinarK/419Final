@@ -5,19 +5,19 @@ package com.dusty.test;
  */
 //Used to store the user data locally
 public class UserInfo {
-    String username,password, name;
+    String username,password, id;
 
-    public UserInfo (String username, String password, String name){
+    public UserInfo (String username, String password, String id){
         this.username = username;
         this.password = password;
-        this.name = name;
+        this.id = id;
     }
 
-    public UserInfo (String username, String password)
+    public UserInfo (String username, String id)
     {
         this.username = username;
-        this.password = password;
-        this.name = "";
+        this.id = id;
+        this.password = "";
     }
 
 }
