@@ -32,6 +32,10 @@
             android:name=".addVacation"
             android:label="@string/title_activity_add_vacation" >
         </activity>
+        <activity
+            android:name=".query"
+            android:label="@string/title_activity_query" >
+        </activity>
     </application>
 
 </manifest>

@@ -2,10 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/deleteVacation"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,23 +29,43 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="location test"
-            android:id="@+id/xlocation" />
+            android:id="@+id/xlocation"
+            android:layout_toStartOf="@id/deleteVacation"
+            android:layout_below="@+id/xname"
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/xdays" />
+            android:id="@+id/xdays"
+            android:layout_below="@+id/xcost"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
-            android:id="@+id/xcost" />
+            android:id="@+id/xcost"
+            android:layout_below="@+id/xlocation"
+            android:layout_alignEnd="@+id/xdays"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/xvacationID"
+            android:layout_below="@+id/xdays" />
 
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

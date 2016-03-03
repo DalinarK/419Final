@@ -3,12 +3,14 @@ package com.dusty.test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,9 +42,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
     Button addVacation;
     EditText currentUser, currentID;
     UserInfoLocalStore userInfoLocalStore;
-
 //    Related to displaying list
     ListView lvVacations;
+
 
 
 
@@ -65,6 +67,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
        //related to displaying lists
         lvVacations = (ListView)findViewById(R.id.lvVacation);
+
+
         new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationbyuser/" + username);
 
     }
@@ -104,8 +108,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 userInfoLocalStore.setUserLoggedIn(false);
                 startActivity(new Intent(this, Login.class));
                 break;
-
-
         }
     }
 
@@ -227,7 +229,15 @@ public class MainActivity extends Activity implements View.OnClickListener{
         protected void onPostExecute(List <tripmodel> result) {
             super.onPostExecute(result);
             vacationAdapter adapter = new vacationAdapter(getApplicationContext(), R.layout.vacationrow, result);
+            Log.d("Diag", "Finished query");
             lvVacations.setAdapter(adapter);
+            lvVacations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Cursor cursorID = (Cursor) lvVacations.getItemAtPosition(position);
+                    Log.d("Diag", "clicked on vacation");
+                }
+            });
 //            outputView.setText("filler");
         }
     }
@@ -256,16 +266,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
             TextView xname;
             TextView xdays;
             TextView xcost;
+            TextView xid;
 
             xlocation = (TextView)convertView.findViewById(R.id.xlocation);
             xname = (TextView)convertView.findViewById(R.id.xname);
             xdays = (TextView)convertView.findViewById(R.id.xdays);
             xcost = (TextView)convertView.findViewById(R.id.xcost);
+            xid = (TextView)convertView.findViewById(R.id.xvacationID);
 
             xlocation.setText(vacationModelList.get(position).getLocation());
             xname.setText(vacationModelList.get(position).getName());
             xdays.setText(vacationModelList.get(position).getDays());
             xcost.setText(vacationModelList.get(position).getCost());
+            xid.setText(vacationModelList.get(position).get_id());
+
 
             return convertView;
         }
