@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.dusty.test.MainActivity;
+import com.dusty.test.Main2Activity;
 import com.dusty.test.R;
 import com.dusty.test.UserInfo;
 import com.dusty.test.UserInfoLocalStore;
@@ -182,7 +182,7 @@ public class Login extends Activity implements View.OnClickListener {
             Log.d("Diag", "Status:" + authenticationStatus);
             if (authenticationStatus == true)
             {
-                startActivity(new Intent(Login.this, MainActivity.class));
+                startActivity(new Intent(Login.this, Main2Activity.class));
             }
             else
             {

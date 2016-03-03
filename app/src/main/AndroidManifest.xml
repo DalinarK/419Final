@@ -36,6 +36,14 @@
             android:name=".query"
             android:label="@string/title_activity_query" >
         </activity>
+        <activity
+            android:name=".queryActivity"
+            android:label="@string/title_activity_query" >
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2" >
+        </activity>
     </application>
 
 </manifest>
