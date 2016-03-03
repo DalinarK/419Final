@@ -60,7 +60,6 @@ public class Login extends Activity implements View.OnClickListener {
                 UserInfo enteredUserInfo = new UserInfo(username, password);
                 userInfoLocalStore.storeUserData(enteredUserInfo);
 
-
                 new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/login", username, password);
                 break;
             case R.id.registerLink:

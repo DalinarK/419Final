@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 //
     Button logoutButton;
+    Button addVacation;
     EditText currentUser, currentID;
     UserInfoLocalStore userInfoLocalStore;
 
@@ -51,7 +53,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         currentUser = (EditText) findViewById(R.id.userName);
         currentID = (EditText) findViewById(R.id.userID);
-
+        addVacation = (Button) findViewById(R.id.addVacation);
+        addVacation.setOnClickListener(this);
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(this);
 
@@ -92,10 +95,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
+            case R.id.addVacation:
+                Log.d("Diag", "addVacation button clicked");
+                startActivity(new Intent(this, addVacation.class));
+                break;
             case R.id.logoutButton:
                 userInfoLocalStore.clearUserData();
                 userInfoLocalStore.setUserLoggedIn(false);
                 startActivity(new Intent(this, Login.class));
+                break;
+
 
         }
     }
