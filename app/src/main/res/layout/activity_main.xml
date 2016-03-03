@@ -33,4 +33,24 @@
         android:id="@+id/logoutButton"
         android:text="Logout"/>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/postOutput"
+            android:text=""/>
+
+        <ListView
+            android:id="@+id/lvVacation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
 </LinearLayout>

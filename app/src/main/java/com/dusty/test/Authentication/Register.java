@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.dusty.test.MainActivity;
 import com.dusty.test.R;
 import com.dusty.test.UserInfo;
 import com.dusty.test.UserInfoLocalStore;
@@ -60,7 +59,7 @@ public class Register extends Activity implements View.OnClickListener {
 
                 new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/register", username, password);
 
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, Login.class));
                 break;
         }
     }
