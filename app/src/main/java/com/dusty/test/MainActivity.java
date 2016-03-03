@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.dusty.test.Authentication.Login;
+
 public class MainActivity extends Activity implements View.OnClickListener{
 
     Button logoutButton;

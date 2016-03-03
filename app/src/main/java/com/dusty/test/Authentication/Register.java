@@ -1,4 +1,4 @@
-package com.dusty.test;
+package com.dusty.test.Authentication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.dusty.test.MainActivity;
+import com.dusty.test.R;
+import com.dusty.test.UserInfo;
+import com.dusty.test.UserInfoLocalStore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,46 +26,42 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Login extends Activity implements View.OnClickListener {
+public class Register extends Activity implements View.OnClickListener {
 
-    Button loginButton, registerLink;
-    EditText enteredUser, enteredPassword;
+    Button registerButton;
+    EditText userEntered, passwordEntered;
     UserInfoLocalStore userInfoLocalStore;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        enteredUser = (EditText) findViewById(R.id.userEntry);
-        enteredPassword = (EditText) findViewById(R.id.passwordEntry);
-        loginButton = (Button) findViewById(R.id.loginButton);
-
-        loginButton.setOnClickListener(this);
-        registerLink = (Button) findViewById(R.id.registerLink);
-        registerLink.setOnClickListener(this);
+        setContentView(R.layout.activity_register);
+        userEntered = (EditText) findViewById(R.id.userRegister);
+        passwordEntered = (EditText) findViewById(R.id.passwordRegister);
 
         //        grants access to the local store
         userInfoLocalStore = new UserInfoLocalStore(this);
+
+        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.loginButton:
-                String username = enteredUser.getText().toString();
-                String password = enteredPassword.getText().toString();
+            case R.id.registerButton:
+                Log.d("Diag", "Clicked Register");
+                String username = userEntered.getText().toString();
+                String password = passwordEntered.getText().toString();
+                Log.d("Diag", "Username is " + username );
+                Log.d("Diag", "password is " + password);
+                UserInfo registrationInfo = new UserInfo(username, password);
 
-                UserInfo enteredUserInfo = new UserInfo(username, password);
-                userInfoLocalStore.storeUserData(enteredUserInfo);
+                new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/register", username, password);
 
-
-                new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/login", username, password);
+                startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.registerLink:
-                Log.d("Diag", "user pressed registerLink");
-                startActivity(new Intent(this, Register.class));
-
         }
     }
 
@@ -116,37 +116,15 @@ public class Login extends Activity implements View.OnClickListener {
                 Log.d("Diag", finalJSON);
 //                Convert to JSONObject for manipulation
                 JSONObject returnValue = new JSONObject(finalJSON);
-                String validResult = returnValue.getString("returnResult");
-                Log.d("Diag", validResult);
-                if (validResult.equals("false"))
-                {
-                    Log.d("Diag", "did not return matching username");
-                    userInfoLocalStore.setUserLoggedIn(false);
-                }
-                else
-                {
-                    Log.d("Diag", "Found matching user");
-                    String returnedUser =returnValue.getString("username");
-//              make sure that the returned object is the actual user
-                    Log.d("Diag", "Comparing DB user: '" + returnedUser + "' with entered: '" + params[1] + "'");
-                    if (returnedUser.equals(params[1]))
-                    {
-                        String password = returnValue.getString("password");
-                        Log.d("Diag", "usernames match, now comparing passwords!" + password + " vs " + params[2]);
-                        if (password.equals(params[2]))
-                        {
-                            Log.d("Diag", "Passwords matched!");
-                            userInfoLocalStore.setUserLoggedIn(true);
-                        }
-                        else
-                        {
-                            Log.d("Diag", "Passwords did not match!");
-                            userInfoLocalStore.setUserLoggedIn(false);
-                        }
-                    }
+                String id = returnValue.getString("_id");
+                String username =returnValue.getString("username");
+                Log.d("Diag", "The id is " + id + "The username is " + username);
 
+//                Store user name and ID
+                UserInfo enteredUserInfo = new UserInfo(username, id);
 
-                }
+                userInfoLocalStore.storeUserData(enteredUserInfo);
+                userInfoLocalStore.setUserLoggedIn(true);
 
                 return null;
             } catch (MalformedURLException e) {
@@ -173,21 +151,6 @@ public class Login extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            // if the user is authenticated then go to main screen
-            Boolean authenticationStatus = userInfoLocalStore.getUserLoggedInStatus();
-            Log.d("Diag", "Status:" + authenticationStatus);
-            if (authenticationStatus == true)
-            {
-                startActivity(new Intent(Login.this, MainActivity.class));
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(),
-                        "Invalid Username/Password", Toast.LENGTH_LONG).show();
-
-            }
-
         }
     }
-
 }
