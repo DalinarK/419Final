@@ -172,19 +172,19 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
                     if(finalObject.isNull("location")) {
                         locationRec = null;
                     } else {
-                        locationRec = "Location: " + finalObject.getString("location");
+                        locationRec = finalObject.getString("location");
                     }
 
                     if(finalObject.isNull("days")) {
                         daysRec = null;
                     } else {
-                        daysRec = "Duration: " + finalObject.getString("days");
+                        daysRec = finalObject.getString("days");
                     }
 
                     if(finalObject.isNull("cost")) {
                         costRec = null;
                     } else {
-                        costRec = "Cost: " + finalObject.getString("cost");
+                        costRec = finalObject.getString("cost");
                     }
 
                     tripModel.set_id(idRec);
