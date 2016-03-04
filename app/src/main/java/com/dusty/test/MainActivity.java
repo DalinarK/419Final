@@ -200,12 +200,9 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
                     tripModel.setName(nameRec);
                     tripModel.setDays(daysRec);
                     tripModel.setCost(costRec);
-////                    Need to implement the actual activities list after finishing this.
                     vacationModelList.add(tripModel);
                 }
 
-//                tripmodel testModel = vacationModelList.get(0);
-//                String output = testModel.getLocation();
 
                 return vacationModelList;
 
