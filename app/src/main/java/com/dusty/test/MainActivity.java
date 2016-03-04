@@ -259,9 +259,7 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
 
                     Log.d("Diag", "clicked on vacation" + xname);
                 }
-            });
-//            outputView.setText("filler");
-        }
+            });}
     }
 
     public class vacationAdapter extends ArrayAdapter

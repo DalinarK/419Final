@@ -33,10 +33,6 @@
             android:label="@string/title_activity_add_vacation" >
         </activity>
         <activity
-            android:name=".query"
-            android:label="@string/title_activity_query" >
-        </activity>
-        <activity
             android:name=".ModifyVacation"
             android:label="@string/title_activity_modify_vacation" >
         </activity>
