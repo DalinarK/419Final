@@ -1,9 +1,8 @@
 package com.dusty.test;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,10 +33,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends ListActivity implements {
 
 
-//
+
     Button logoutButton;
     Button addVacation;
     EditText currentUser, currentID;
@@ -65,7 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         UserInfo userInfo = userInfoLocalStore.getLoggedInUser();
         String username = userInfo.username;
 
-       //related to displaying lists
+//       related to displaying lists
         lvVacations = (ListView)findViewById(R.id.lvVacation);
 
 
@@ -234,7 +233,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             lvVacations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Cursor cursorID = (Cursor) lvVacations.getItemAtPosition(position);
+//                    Cursor cursorID = (Cursor) lvVacations.getItemAtPosition(position);
                     Log.d("Diag", "clicked on vacation");
                 }
             });
