@@ -34,7 +34,6 @@ public class addVacation extends Activity implements LocationListener {
     private String provider;
 
     private Location location;
-    public final static String EXTRA_MESSAGE = "com.dustin.secondtry.MESSAGE";
     String costOfVacation = null;
     String username;
 
@@ -148,11 +147,6 @@ public class addVacation extends Activity implements LocationListener {
             daysText.setError("Number of days is required!");
         } else {
             new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist", vacation_name, vacation_spot, number_days, costOfVacation, username);
-            Intent intent = new Intent(this, MainActivity.class);
-//          String message = editText.getText().toString();
-//          intent.putExtra(EXTRA_MESSAGE, message);
-
-            startActivity(intent);
         }
 
     }
@@ -243,7 +237,10 @@ public class addVacation extends Activity implements LocationListener {
 
         @Override
         protected void onPostExecute(String result) {
+
             super.onPostExecute(result);
+            Intent intent = new Intent(addVacation.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 
