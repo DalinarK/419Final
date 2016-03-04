@@ -6,6 +6,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -121,6 +122,13 @@ public class addVacation extends Activity implements LocationListener {
         }
 
     }
+
+    public void imageButton(View view) {
+        Log.d("Diag", "inside imageButton");
+        Intent intent = new Intent(this, addImage.class);
+        startActivity(intent);
+    }
+
 
     //    http://developer.android.com/guide/topics/ui/controls/radiobutton.html
     public void onRadioButtonClicked(View view) {

@@ -12,4 +12,15 @@
     <string name="vacation_name">Title of your trip!</string>
     <string name="title_activity_query">query</string>
     <string name="title_activity_modify_vacation">ModifyVacation</string>
+
+
+    <string name="choose">Choose Image</string>
+    <string name="upload">Upload</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="notification_fail">Image failed to upload...</string>
+    <string name="notification_share_link">Share link</string>
+    <string name="notifaction_success">Successfully uploaded</string>
+    <string name="notification_progress">Uploading image...</string>
+    <string name="title_activity_add_image">addImage</string>
 </resources>
