@@ -1,8 +1,11 @@
 package com.dusty.test;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ModifyVacation extends Activity {
+public class ModifyVacation extends Activity implements LocationListener {
 
     private TextView locationField;
     private LocationManager locationManager;
@@ -43,7 +46,24 @@ public class ModifyVacation extends Activity {
         setContentView(R.layout.activity_modify_vacation);
 
 //      Used to find out current GPS location
-        locationField = (TextView) findViewById(R.id.vacation_spot);
+        locationField = (TextView) findViewById(R.id.gpsCoordinates);
+//
+        // Get the location manager
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Define the criteria how to select the locatioin provider -> use
+        // default
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+        location = locationManager.getLastKnownLocation(provider);
+
+//        // Initialize the location fields
+        if (location != null) {
+            System.out.println("Provider " + provider + " has been selected.");
+            onLocationChanged(location);
+        } else {
+            locationField.setText("Location not yet available");
+        }
+
 
 //      Used to find out the vacation to be modified
         Intent intent = getIntent();
@@ -111,6 +131,47 @@ public class ModifyVacation extends Activity {
 
     }
 
+    /* Request updates at startup */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        locationManager.requestLocationUpdates(provider, 400, 1, this);
+    }
+
+    /* Remove the locationlistener updates when Activity is paused */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationManager.removeUpdates(this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    public void useCurrentLocation(View view)
+    {
+        Log.d("Diag", "GPS button clicked");
+        double lat = (double) (location.getLatitude());
+        double lng = (double) (location.getLongitude());
+        locationField.setText(lat + ", " + lng);
+    }
 
     public class deleteTask extends AsyncTask<String, String, String> {
 

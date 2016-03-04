@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,14 +44,16 @@ public class addVacation extends Activity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vacation);
-//      Used to find out current GPS location
-        locationField = (TextView) findViewById(R.id.vacation_spot);
 
 //        used for pull up user information
         userInfoLocalStore = new UserInfoLocalStore(this);
         UserInfo userInfo = userInfoLocalStore.getLoggedInUser();
         username = userInfo.username;
+
+//      Used to find out current GPS location
+        locationField = (TextView) findViewById(R.id.gpsCoordinates);
 //
+        // Get the location manager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         // Define the criteria how to select the locatioin provider -> use
         // default
@@ -63,6 +66,7 @@ public class addVacation extends Activity implements LocationListener {
             System.out.println("Provider " + provider + " has been selected.");
             onLocationChanged(location);
         } else {
+            locationField.setText("Location not yet available");
         }
     }
 
@@ -70,14 +74,14 @@ public class addVacation extends Activity implements LocationListener {
     @Override
     protected void onResume() {
         super.onResume();
-//        locationManager.requestLocationUpdates(provider, 400, 1, this);
+        locationManager.requestLocationUpdates(provider, 400, 1, this);
     }
 
     /* Remove the locationlistener updates when Activity is paused */
     @Override
     protected void onPause() {
         super.onPause();
-//        locationManager.removeUpdates(this);
+        locationManager.removeUpdates(this);
     }
 
     @Override
@@ -121,8 +125,9 @@ public class addVacation extends Activity implements LocationListener {
 
     public void useCurrentLocation(View view)
     {
-        double lat = (location.getLatitude());
-        double lng = (location.getLongitude());
+        Log.d("Diag", "GPS button clicked");
+        double lat = (double) (location.getLatitude());
+        double lng = (double) (location.getLongitude());
         locationField.setText(lat + ", " + lng);
     }
 
