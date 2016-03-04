@@ -33,7 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ListActivity implements {
+public class MainActivity extends ListActivity implements View.OnClickListener{
 
 
 
@@ -233,8 +233,31 @@ public class MainActivity extends ListActivity implements {
             lvVacations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    Cursor cursorID = (Cursor) lvVacations.getItemAtPosition(position);
-                    Log.d("Diag", "clicked on vacation");
+                    TextView text = (TextView) view.findViewById(R.id.xname);
+                    String xname = text.getText().toString().trim();
+
+                    text = (TextView) view.findViewById(R.id.xvacationID);
+                    String xvacationID = text.getText().toString().trim();
+
+                    text = (TextView) view.findViewById(R.id.xcost);
+                    String xcost = text.getText().toString().trim();
+
+                    text = (TextView) view.findViewById(R.id.xdays);
+                    String xdays = text.getText().toString().trim();
+
+                    text = (TextView) view.findViewById(R.id.xlocation);
+                    String xlocation = text.getText().toString().trim();
+
+                    Intent intent = new Intent(MainActivity.this, ModifyVacation.class);
+                    intent.putExtra("id", xvacationID);
+                    intent.putExtra("name", xname);
+                    intent.putExtra("location", xlocation);
+                    intent.putExtra("cost", xcost);
+                    intent.putExtra("duration", xdays);
+                    startActivity(intent);
+
+
+                    Log.d("Diag", "clicked on vacation" + xname);
                 }
             });
 //            outputView.setText("filler");
