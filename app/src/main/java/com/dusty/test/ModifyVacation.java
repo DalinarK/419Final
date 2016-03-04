@@ -38,6 +38,7 @@ public class ModifyVacation extends Activity implements LocationListener {
     String xlocation;
     String xcost;
     String xdays;
+    String xgpsCoords;
 
 
     @Override
@@ -72,6 +73,7 @@ public class ModifyVacation extends Activity implements LocationListener {
         xlocation = intent.getStringExtra("location");
         xcost = intent.getStringExtra("cost");
         xdays = intent.getStringExtra("duration");
+        xgpsCoords = intent.getStringExtra("gpsCoords");
 
         EditText nameText = (EditText) findViewById(R.id.vacation_name);
         nameText.setText(xname);
@@ -79,6 +81,8 @@ public class ModifyVacation extends Activity implements LocationListener {
         locationText.setText(xlocation);
         EditText daysText = (EditText) findViewById(R.id.number_days);
         daysText.setText(xdays);
+        EditText gpsText = (EditText) findViewById(R.id.gpsCoordinates);
+        gpsText.setText(xgpsCoords);
         EditText cost = (EditText) findViewById(R.id.number_days);
 
         Log.d("Diag", "cost is " + xcost);
@@ -113,6 +117,8 @@ public class ModifyVacation extends Activity implements LocationListener {
         String vacation_spot = locationText.getText().toString();
         EditText daysText = (EditText) findViewById(R.id.number_days);
         String number_days = daysText.getText().toString();
+        EditText gpsText = (EditText) findViewById(R.id.gpsCoordinates);
+        xgpsCoords = gpsText.getText().toString();
 
 //      Input validation
         if (vacation_name.length() < 10) {
@@ -126,7 +132,7 @@ public class ModifyVacation extends Activity implements LocationListener {
         } else if (number_days.length() == 0) {
             daysText.setError("Number of days is required!");
         } else {
-            new modifyTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist/"+xid, vacation_name, vacation_spot, number_days, xcost, "test");
+            new modifyTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist/"+xid, vacation_name, vacation_spot, number_days, xcost, xname, xgpsCoords);
         }
 
     }
@@ -264,7 +270,10 @@ public class ModifyVacation extends Activity implements LocationListener {
                 postInfo.put("days", params[3]);
                 postInfo.put("cost", params[4]);
                 postInfo.put("username", params[5]);
+                postInfo.put("gpsCoords", params[6]);
                 String JSONstring = postInfo.toString();
+
+                Log.d("Diag", "gps is" + params[6]);
 
                 byte[] outputInBytes = JSONstring.getBytes("UTF-8");
                 OutputStream os = connection.getOutputStream();

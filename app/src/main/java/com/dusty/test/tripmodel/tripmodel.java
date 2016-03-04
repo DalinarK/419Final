@@ -14,7 +14,16 @@ public class tripmodel {
     private String days;
     private String demographic;
     private String cost;
+    private String gps;
     private List<activities> activitiesList;
+
+    public String getGps() {
+        return gps;
+    }
+
+    public void setGps(String gps) {
+        this.gps = gps;
+    }
 
     public String get_id() {
         return _id;

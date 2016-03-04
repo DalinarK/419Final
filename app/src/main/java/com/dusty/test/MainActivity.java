@@ -151,6 +151,7 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
                 String daysRec = "";
                 String costRec = "";
                 String demographic ="";
+                String gpsRec = "";
 
                 for (int i = 0; i < parentArray.length(); i++)
                 {
@@ -187,6 +188,13 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
                         costRec = finalObject.getString("cost");
                     }
 
+                    if(finalObject.isNull("gpsCoords")) {
+                        gpsRec = null;
+                    } else {
+                        gpsRec = finalObject.getString("gpsCoords");
+                    }
+
+                    tripModel.setGps(gpsRec);
                     tripModel.set_id(idRec);
                     tripModel.setLocation(locationRec);
                     tripModel.setName(nameRec);
@@ -248,12 +256,16 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
                     text = (TextView) view.findViewById(R.id.xlocation);
                     String xlocation = text.getText().toString().trim();
 
+                    text = (TextView) view.findViewById(R.id.xgpscoords);
+                    String xgpsCoords = text.getText().toString();
+
                     Intent intent = new Intent(MainActivity.this, ModifyVacation.class);
                     intent.putExtra("id", xvacationID);
                     intent.putExtra("name", xname);
                     intent.putExtra("location", xlocation);
                     intent.putExtra("cost", xcost);
                     intent.putExtra("duration", xdays);
+                    intent.putExtra("gpsCoords", xgpsCoords);
                     startActivity(intent);
 
 
@@ -286,12 +298,14 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
             TextView xname;
             TextView xdays;
             TextView xcost;
+            TextView xgpsCoords;
             TextView xid;
 
             xlocation = (TextView)convertView.findViewById(R.id.xlocation);
             xname = (TextView)convertView.findViewById(R.id.xname);
             xdays = (TextView)convertView.findViewById(R.id.xdays);
             xcost = (TextView)convertView.findViewById(R.id.xcost);
+            xgpsCoords = (TextView) convertView.findViewById(R.id.xgpscoords);
             xid = (TextView)convertView.findViewById(R.id.xvacationID);
 
             xlocation.setText(vacationModelList.get(position).getLocation());
@@ -299,6 +313,7 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
             xdays.setText(vacationModelList.get(position).getDays());
             xcost.setText(vacationModelList.get(position).getCost());
             xid.setText(vacationModelList.get(position).get_id());
+            xgpsCoords.setText(vacationModelList.get(position).getGps());
 
 
             return convertView;

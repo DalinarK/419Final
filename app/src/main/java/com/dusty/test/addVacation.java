@@ -33,6 +33,7 @@ public class addVacation extends Activity implements LocationListener {
     private TextView locationField;
     private LocationManager locationManager;
     private String provider;
+    String xgpsCoords;
 
     private Location location;
     String costOfVacation = null;
@@ -138,6 +139,14 @@ public class addVacation extends Activity implements LocationListener {
         String vacation_spot = locationText.getText().toString();
         EditText daysText = (EditText) findViewById(R.id.number_days);
         String number_days = daysText.getText().toString();
+        EditText gpsText = (EditText) findViewById(R.id.gpsCoordinates);
+        xgpsCoords = gpsText.getText().toString();
+        if (xgpsCoords.isEmpty())
+        {
+            Log.d("Diag", "no gps provided adding blanks space");
+            xgpsCoords = "No GPS Provided";
+        }
+        Log.d("Diag", "GPS coords are " + xgpsCoords.length());
 
 //      Input validation
         if (vacation_name.length() < 10) {
@@ -151,7 +160,7 @@ public class addVacation extends Activity implements LocationListener {
         } else if (number_days.length() == 0) {
             daysText.setError("Number of days is required!");
         } else {
-            new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist", vacation_name, vacation_spot, number_days, costOfVacation, username);
+            new JSONTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist", vacation_name, vacation_spot, number_days, costOfVacation, username, xgpsCoords);
         }
 
     }
@@ -209,6 +218,7 @@ public class addVacation extends Activity implements LocationListener {
                 postInfo.put("days", params[3]);
                 postInfo.put("cost", params[4]);
                 postInfo.put("username", params[5]);
+                postInfo.put("gpsCoords", params[6]);
                 String JSONstring = postInfo.toString();
 
                 byte[] outputInBytes = JSONstring.getBytes("UTF-8");
