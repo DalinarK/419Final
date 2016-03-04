@@ -12,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="Name"
             android:id="@+id/xname" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
+            android:text="Duration"
             android:id="@+id/xdays"
             android:layout_below="@+id/xcost"
             android:layout_alignParentStart="true"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
+            android:text="Cost"
             android:id="@+id/xcost"
             android:layout_below="@+id/xlocation"
             android:layout_alignEnd="@+id/xdays"
@@ -50,9 +50,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
             android:id="@+id/xvacationID"
-            android:layout_below="@+id/xdays" />
+            android:layout_below="@+id/xdays"
+            android:visibility="invisible"/>
 
 
 

@@ -73,7 +73,7 @@ public class ModifyVacation extends Activity {
             RadioButton radio = (RadioButton) findViewById(R.id.costMed);
             radio.setChecked(true);
         }
-        else if(xcost.equals("$$")){
+        else if(xcost.equals("$$$")){
             Log.d("Diag", "cost is $$$");
             RadioButton radio = (RadioButton) findViewById(R.id.costExpensive);
             radio.setChecked(true);
@@ -106,12 +106,7 @@ public class ModifyVacation extends Activity {
         } else if (number_days.length() == 0) {
             daysText.setError("Number of days is required!");
         } else {
-            new modifyTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist", vacation_name, vacation_spot, number_days, xcost, "test");
-            Intent intent = new Intent(this, MainActivity.class);
-//          String message = editText.getText().toString();
-//          intent.putExtra(EXTRA_MESSAGE, message);
-
-            startActivity(intent);
+            new modifyTask().execute("http://ec2-54-213-159-144.us-west-2.compute.amazonaws.com:3001/vacationlist/"+xid, vacation_name, vacation_spot, number_days, xcost, "test");
         }
 
     }
@@ -194,7 +189,7 @@ public class ModifyVacation extends Activity {
                 connection = (HttpURLConnection) url.openConnection();
 //            //sets the connection up for sending data
                 connection.setDoOutput(true);
-                connection.setRequestMethod("POST");
+                connection.setRequestMethod("PUT");
                 connection.setUseCaches(false);
                 connection.setConnectTimeout(10000);
                 connection.setReadTimeout(10000);
