@@ -2,15 +2,12 @@ package com.dusty.test;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +22,6 @@ import java.net.URL;
 
 public class ModifyVacation extends Activity {
 
-    private TextView locationField;
-    private LocationManager locationManager;
-    private String provider;
-    private Location location;
-
     String xid;
     String xname;
     String xlocation;
@@ -41,9 +33,6 @@ public class ModifyVacation extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_vacation);
-
-//      Used to find out current GPS location
-        locationField = (TextView) findViewById(R.id.vacation_spot);
 
 //      Used to find out the vacation to be modified
         Intent intent = getIntent();

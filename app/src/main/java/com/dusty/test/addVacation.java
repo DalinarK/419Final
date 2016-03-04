@@ -1,20 +1,15 @@
 package com.dusty.test;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,11 +24,8 @@ import java.net.URL;
 
 public class addVacation extends Activity implements LocationListener {
 
-    private TextView locationField;
-    private LocationManager locationManager;
     private String provider;
 
-    private Location location;
     String costOfVacation = null;
     String username;
 
@@ -43,27 +35,12 @@ public class addVacation extends Activity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vacation);
-//      Used to find out current GPS location
-        locationField = (TextView) findViewById(R.id.vacation_spot);
 
 //        used for pull up user information
         userInfoLocalStore = new UserInfoLocalStore(this);
         UserInfo userInfo = userInfoLocalStore.getLoggedInUser();
         username = userInfo.username;
-//
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        // Define the criteria how to select the locatioin provider -> use
-        // default
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        location = locationManager.getLastKnownLocation(provider);
 
-//        // Initialize the location fields
-        if (location != null) {
-            System.out.println("Provider " + provider + " has been selected.");
-            onLocationChanged(location);
-        } else {
-        }
     }
 
     /* Request updates at startup */
@@ -119,12 +96,6 @@ public class addVacation extends Activity implements LocationListener {
 //        return super.onOptionsItemSelected(item);
 //    }
 
-    public void useCurrentLocation(View view)
-    {
-        double lat = (location.getLatitude());
-        double lng = (location.getLongitude());
-        locationField.setText(lat + ", " + lng);
-    }
 
     public void sendMessage(View view) {
         EditText nameText = (EditText) findViewById(R.id.vacation_name);
