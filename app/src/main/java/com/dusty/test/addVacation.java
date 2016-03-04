@@ -144,7 +144,7 @@ public class addVacation extends Activity implements LocationListener {
         if (xgpsCoords.isEmpty())
         {
             Log.d("Diag", "no gps provided adding blanks space");
-            xgpsCoords = "No GPS Provided";
+            xgpsCoords = " ";
         }
         Log.d("Diag", "GPS coords are " + xgpsCoords.length());
 

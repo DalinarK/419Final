@@ -265,7 +265,6 @@ public class MainActivity extends ListActivity implements View.OnClickListener{
                     intent.putExtra("gpsCoords", xgpsCoords);
                     startActivity(intent);
 
-
                     Log.d("Diag", "clicked on vacation" + xname);
                 }
             });}

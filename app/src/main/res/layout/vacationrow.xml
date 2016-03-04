@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
         <TextView
@@ -24,6 +20,19 @@
             android:layout_below="@+id/xname"
             android:layout_alignParentLeft="true" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Duration: "
+            android:id="@+id/daylabel"
+            android:layout_below="@+id/xcost"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +42,23 @@
             android:layout_below="@+id/xcost"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Cost: "
+            android:id="@+id/costlabel"
+            android:layout_below="@+id/xlocation"
+            android:layout_alignEnd="@+id/xdays"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,14 +70,31 @@
             android:layout_alignParentTop="false"
             android:layout_alignParentBottom="false"
             android:layout_alignParentLeft="true" />
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/xgpscoords"
-            android:layout_below="@+id/xdays"
-            />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="GPS: "
+        android:id="@+id/gpslabel"
+        android:layout_below="@+id/xdays"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/xgpscoords"
+        android:layout_below="@+id/xdays"
+        />
+
+</LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,12 +103,5 @@
             android:id="@+id/xvacationID"
             android:layout_below="@+id/xgpscoords"
             android:visibility="invisible"/>
-
-
-
-
-
-
-    </RelativeLayout>
 
 </LinearLayout>
